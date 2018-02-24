@@ -1,0 +1,23 @@
+﻿@model FinalProjectMVC.ViewModels.RegisterViewModel
+
+<h2>Registration Page</h2>
+
+<form asp-controller="Homepage" asp-action="Register" method="post">
+    <label asp-for="Username"></label>
+    <input asp-for="Username" />
+    <span asp-validation-for="Username"></span>
+
+    <label asp-for="Email"></label>
+    <input asp-for="Email" />
+    <span asp-validation-for="Email"></span>
+
+    <label asp-for="Password"></label>
+    <input type="password" asp-for="Password" />
+    <span asp-validation-for="Password"></span>
+
+    <label asp-for="Verify"></label>
+    <input type="password" asp-for="Verify" /> 
+    <span asp-validation-for="Verify"></span>
+
+    <input type="submit" value="Submit" />
+</form>

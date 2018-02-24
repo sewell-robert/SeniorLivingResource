@@ -1,0 +1,29 @@
+﻿@model List<FinalProjectMVC.Models.User>
+
+@{
+    ViewData["Title"] = "HomePage";
+}
+
+@if (Model != null)
+{
+    foreach (User user in Model)
+    {
+        <h1> Welcome, @user.Username!</h1>
+    }
+}
+
+<h2>Senior Living Resource</h2>
+
+<a href="/HomePage/Index">Home</a>&nbsp;
+<a href="/Homepage/Browse">Browse</a>
+
+<div style="text-align: center">
+    <h2>Featured Senior Living Community</h2>
+
+    <h3>@ViewBag.community.Name</h3><br />
+    <h4>Price: @ViewBag.community.Price</h4>
+    <h4>Area: @ViewBag.community.Area</h4>
+    <h4>Level of Care: @ViewBag.community.CareLevel</h4><br />
+    <img src="http://wolfmediausa.com/wp-content/uploads/2016/02/The-Piper-Kansas-City.jpg" alt="The Piper" height="300" width="600" />
+</div>
+
