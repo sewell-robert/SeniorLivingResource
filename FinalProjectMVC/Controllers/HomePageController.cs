@@ -68,5 +68,20 @@ namespace FinalProjectMVC.Controllers
 
             return View(loginViewModel);
         }
+
+        public IActionResult Browse()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Browse(string name, string price, string area, string careLevel)
+        {
+            ViewBag.name = name;
+            ViewBag.price = price;
+            ViewBag.area = area;
+            ViewBag.careLevel = careLevel;
+            return View();
+        }
     }
 }

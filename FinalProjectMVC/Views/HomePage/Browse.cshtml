@@ -1,0 +1,32 @@
+﻿<h2>Browse</h2>
+
+<form action="Browse" method="post">
+    <label for="name">Search by Name</label>
+    <input type="text" id="name" name="Name" />
+
+    <label for="price">Price Range</label>
+    <select id="price" name="price">
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+    </select>
+
+    <label for="area">Area Location</label>
+    <select id="area" name="area">
+        <option value="South">South Kansas City</option>
+        <option value="Central">Central Kansas City</option>
+        <option value="North">North Kansas City</option>
+    </select>
+
+    <label for="careLevel">Level of Care</label>
+    <select id="careLevel" name="careLevel">
+        <option value="Low">Low Level of Care</option>
+        <option value="Medium">Medium Level of Care</option>
+        <option value="High">High Level of Care</option>
+    </select>
+
+    <input type="submit" value="submit" />
+</form>
+
+<!--Testing Browse form capabilities-->
+<h3>Search Parameters: @ViewBag.name  @ViewBag.price  @ViewBag.area  @ViewBag.careLevel</h3>

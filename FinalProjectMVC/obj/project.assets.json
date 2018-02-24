@@ -13132,11 +13132,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\Bobby\\Desktop\\C#Projects\\FinalProjectMVC\\FinalProjectMVC\\FinalProjectMVC.csproj",
+      "projectUniqueName": "C:\\Users\\Bobby\\Desktop\\FinalProjectMVC\\FinalProjectMVC\\FinalProjectMVC.csproj",
       "projectName": "FinalProjectMVC",
-      "projectPath": "C:\\Users\\Bobby\\Desktop\\C#Projects\\FinalProjectMVC\\FinalProjectMVC\\FinalProjectMVC.csproj",
+      "projectPath": "C:\\Users\\Bobby\\Desktop\\FinalProjectMVC\\FinalProjectMVC\\FinalProjectMVC.csproj",
       "packagesPath": "C:\\Users\\Bobby\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Bobby\\Desktop\\C#Projects\\FinalProjectMVC\\FinalProjectMVC\\obj\\",
+      "outputPath": "C:\\Users\\Bobby\\Desktop\\FinalProjectMVC\\FinalProjectMVC\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
