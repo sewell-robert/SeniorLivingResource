@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FinalProjectMVC.Models;
 using FinalProjectMVC.ViewModels;
-using FinalProjectMVC.DataLayer;
+using FinalProjectMVC.Data;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,15 +14,28 @@ namespace FinalProjectMVC.Controllers
 {
     public class HomePageController : Controller
     {
-        static public List<User> users = new List<User>();
+        private FinalProjectDbContext context;
 
-        static public CommunityClass community = new CommunityClass("The Piper", "High", "North", "High");
+        public HomePageController(FinalProjectDbContext dbContext)
+        {
+            context = dbContext;
+        }
+
+        static public CommunityInfoClass community = new CommunityInfoClass("The Piper", "High", "North", "High");
 
         // GET: /<controller>/
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
             ViewBag.community = community;
-            return View(users);
+
+            if (id > 0)
+            {
+                User user = context.Users.Single(c => c.ID == id);
+
+                return View(user);
+            }
+
+            return View();
         }
 
         // Method to render register page
@@ -38,12 +52,23 @@ namespace FinalProjectMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                User newUser = new User(registerViewModel.Username, registerViewModel.Password, registerViewModel.Email);
+                UserPrefs newUserPrefs = new UserPrefs()
+                {
+                    UsersPrice = registerViewModel.UsersPrice,
+                    UsersArea = registerViewModel.UsersArea,
+                    UsersCareLevel = registerViewModel.UsersCareLevel
+                };
 
-                //Add new User object to list of users
-                users.Add(newUser);
+                context.Preferences.Add(newUserPrefs);
+                context.SaveChanges();
 
-                return Redirect("/Homepage");
+                User newUser = new User(registerViewModel.Username, registerViewModel.Password, registerViewModel.Email, newUserPrefs);
+
+                //Add new User object to database
+                context.Users.Add(newUser);
+                context.SaveChanges();
+
+                return Redirect("/Homepage/Index/?id=" + newUser.ID);
             }
 
             else return View(registerViewModel);
@@ -58,14 +83,21 @@ namespace FinalProjectMVC.Controllers
         [HttpPost]
         public IActionResult Login(LoginViewModel loginViewModel)
         {
-            foreach (User user in users)
+            if (ModelState.IsValid)
             {
-                if (loginViewModel.Username == user.Username && loginViewModel.Password == user.Password)
+                List<User> existingUsers = context.Users.ToList();
+
+                if (existingUsers != null)
                 {
-                    return Redirect("/Homepage");
+                    foreach (User user in existingUsers)
+                    {
+                        if (user.Username == loginViewModel.Username && user.Password == loginViewModel.Password)
+                        {
+                            return Redirect("/HomePage/Index/?id=" + user.ID);
+                        }
+                    }
                 }
             }
-
             return View(loginViewModel);
         }
 
@@ -77,10 +109,6 @@ namespace FinalProjectMVC.Controllers
         [HttpPost]
         public IActionResult Browse(string name, string price, string area, string careLevel)
         {
-            ViewBag.name = name;
-            ViewBag.price = price;
-            ViewBag.area = area;
-            ViewBag.careLevel = careLevel;
             return View();
         }
     }

@@ -8,21 +8,22 @@ namespace FinalProjectMVC.Models
     public class User
     {
         //create class to create new users
-        public int UserId;
-        private static int nextId = 1;
-
+        public int ID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
 
-        public User(string username, string password, string email)
+        public UserPrefs Prefs { get; set; }
+        public int UserPrefsID { get; set; }
+
+        public User(string username, string password, string email, UserPrefs newUserPrefs)
         {
             Username = username;
             Password = password;
             Email = email;
-
-            UserId = nextId;
-            nextId++;
+            Prefs = newUserPrefs;
         }
+
+        public User() { }
     }
 }

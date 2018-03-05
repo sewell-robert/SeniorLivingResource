@@ -7,24 +7,8 @@ using System.Threading.Tasks;
 
 namespace FinalProjectMVC.ViewModels
 {
-    //Create RegisterViewModel to be able to validate user input in the register form
-    public class RegisterViewModel
+    public class PreferencesViewModel
     {
-        [Required]
-        public string Username { get; set; }
-
-        [Required]
-        [MinLength(7)]
-        public string Password { get; set; }
-
-        [Required]
-        [Compare("Password")]
-        [Display(Name = "Verify Password")]
-        public string Verify { get; set; }
-
-        [EmailAddress]
-        public string Email { get; set; }
-
         [Required]
         [Display(Name = "Price")]
         public string UsersPrice { get; set; }
@@ -37,20 +21,11 @@ namespace FinalProjectMVC.ViewModels
         [Display(Name = "Care Level")]
         public string UsersCareLevel { get; set; }
 
-        //Create RegisterViewModel constructor to take in arguments
-        /**public RegisterViewModel(string username, string password, string verify, string email)
-        {
-            Username = username;
-            Password = password;
-            Verify = verify;
-            Email = email;
-        }**/
-
         public List<SelectListItem> Prices { get; set; }
         public List<SelectListItem> Areas { get; set; }
         public List<SelectListItem> CareLevels { get; set; }
 
-        public RegisterViewModel()
+        public PreferencesViewModel()
         {
             Prices = new List<SelectListItem>();
 

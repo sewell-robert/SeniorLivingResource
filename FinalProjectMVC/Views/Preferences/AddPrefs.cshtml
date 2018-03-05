@@ -1,0 +1,21 @@
+﻿@model FinalProjectMVC.ViewModels.PreferencesViewModel
+
+@{
+    ViewData["Title"] = "Add Preferences";
+}
+
+<h3>@ViewData["Title"]</h3>
+
+<form asp-controller="Preferences" asp-action="AddPrefs" method="post">
+    <label asp-for="UsersPrice"></label>
+    <select asp-for="UsersPrice" asp-items="Model.Prices"></select>
+    &nbsp;
+    <label asp-for="UsersArea"></label>
+    <select asp-for="UsersArea" asp-items="Model.Areas"></select>
+    &nbsp;
+    <label asp-for="UsersCareLevel"></label>
+    <select asp-for="UsersCareLevel" asp-items="Model.CareLevels"></select>
+
+    <input type="submit" value="Submit" />
+</form>
+

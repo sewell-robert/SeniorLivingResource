@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 
 namespace FinalProjectMVC.Models
 {
-    public class CommunityClass
+    public class CommunityInfoClass
     {
         public string Name { get; set; }
         public string Price { get; set; }
         public string Area { get; set; }
         public string CareLevel { get; set; }
 
-        public CommunityClass(string name, string price, string area, string careLevel)
+        public CommunityInfoClass(string name, string price, string area, string careLevel)
         {
             Name = name;
             Price = price;

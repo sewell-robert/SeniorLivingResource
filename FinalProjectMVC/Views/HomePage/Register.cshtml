@@ -6,18 +6,31 @@
     <label asp-for="Username"></label>
     <input asp-for="Username" />
     <span asp-validation-for="Username"></span>
-
+    <br />
     <label asp-for="Email"></label>
     <input asp-for="Email" />
     <span asp-validation-for="Email"></span>
-
+    <br />
     <label asp-for="Password"></label>
     <input type="password" asp-for="Password" />
     <span asp-validation-for="Password"></span>
-
+    <br />
     <label asp-for="Verify"></label>
-    <input type="password" asp-for="Verify" /> 
+    <input type="password" asp-for="Verify" />
     <span asp-validation-for="Verify"></span>
+    <br />
+
+    <label asp-for="UsersPrice"></label>
+    <select asp-for="UsersPrice" asp-items="Model.Prices"></select>
+    <span asp-validation-for="UsersPrice"></span>
+
+    <label asp-for="UsersArea"></label>
+    <select asp-for="UsersArea" asp-items="Model.Areas"></select>
+    <span asp-validation-for="UsersArea"></span>
+
+    <label asp-for="UsersCareLevel"></label>
+    <select asp-for="UsersCareLevel" asp-items="Model.CareLevels"></select>
+    <span asp-validation-for="UsersCareLevel"></span>
 
     <input type="submit" value="Submit" />
 </form>
