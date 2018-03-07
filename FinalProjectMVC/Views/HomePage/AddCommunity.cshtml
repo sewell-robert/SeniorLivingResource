@@ -1,0 +1,24 @@
+﻿@model FinalProjectMVC.ViewModels.AddCommunityViewModel
+
+
+<h3>Add Community</h3>
+
+<form asp-controller="HomePage" asp-action="AddCommunity" method="post">
+    <label asp-for="Name"></label>
+    <input asp-for="Name" />
+    <span asp-validation-for="Name"></span>
+
+    <label asp-for="Price"></label>
+    <input asp-for="Price" />
+    <span asp-validation-for="Price"></span>
+
+    <label asp-for="Area"></label>
+    <input asp-for="Area" />
+    <span asp-validation-for="Area"></span>
+
+    <label asp-for="CareLevel"></label>
+    <input asp-for="CareLevel" />
+    <span asp-validation-for="CareLevel"></span>
+
+    <input type="submit" value="submit" />
+</form>

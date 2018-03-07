@@ -2,15 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FinalProjectMVC.Data;
 using FinalProjectMVC.Models;
 using FinalProjectMVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
 
 namespace FinalProjectMVC.Controllers
 {
-    public class PreferencesController : Controller
+    public class PreferencesController : HomePageController
     {
-        public IActionResult AddPrefs()
+        private FinalProjectDbContext context;
+
+        public PreferencesController(FinalProjectDbContext dbContext)
+            : base(dbContext)
+        {
+            context = dbContext;
+        }
+
+        public IActionResult ChangePrefs()
         {
             PreferencesViewModel preferencesViewModel = new PreferencesViewModel();
             
@@ -18,21 +29,30 @@ namespace FinalProjectMVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddPrefs(PreferencesViewModel preferencesViewModel)
+        public IActionResult ChangePrefs(PreferencesViewModel preferencesViewModel)
         {
             if (ModelState.IsValid)
             {
-                UserPrefs newUserPrefs = new UserPrefs()
+                if (tempUsername != null)
                 {
-                    UsersPrice = preferencesViewModel.UsersPrice,
-                    UsersArea = preferencesViewModel.UsersArea,
-                    UsersCareLevel = preferencesViewModel.UsersCareLevel
-                };
+                    User currentUser = context.Users.Single(c => c.Username == tempUsername);
 
-                return Redirect("/HomePage/Browse");
+                    UserPrefs currentUserPrefs = context.Preferences.Single(p => p.ID == currentUser.UserPrefsID);
+
+                    currentUserPrefs.UsersPrice = preferencesViewModel.UsersPrice;
+                    currentUserPrefs.UsersArea = preferencesViewModel.UsersArea;
+                    currentUserPrefs.UsersCareLevel = preferencesViewModel.UsersCareLevel;
+
+                    context.Preferences.Update(currentUserPrefs);
+                    context.SaveChanges();
+
+                    return Redirect("/HomePage/Browse");
+                }
+
+                //TODO - return an error letting the user know that he needs to login or register first
+                return View(preferencesViewModel);
 
             }
-
             return View(preferencesViewModel);
         }
     }

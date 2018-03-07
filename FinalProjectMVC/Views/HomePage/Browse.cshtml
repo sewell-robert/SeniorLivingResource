@@ -1,4 +1,20 @@
-﻿<h2>Results</h2>
+﻿@model List<FinalProjectMVC.Models.Community>
+
+@if (Model != null)
+{
+<h3>@Model.Count Results</h3>
+
+<ul>
+    @foreach (Community com in Model)
+    {
+        <li>@com.Name</li>
+    }
+</ul>
+}
+else
+{
+    <h3>No results meet your preferences.</h3>
+}
 
 <!--<form action="Browse" method="post">
     <label for="name">Search by Name</label>

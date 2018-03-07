@@ -25,5 +25,10 @@ namespace FinalProjectMVC.Models
         }
 
         public User() { }
+
+        internal User Include(Func<object, object> p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

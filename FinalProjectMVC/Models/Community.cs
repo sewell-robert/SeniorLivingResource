@@ -5,19 +5,22 @@ using System.Threading.Tasks;
 
 namespace FinalProjectMVC.Models
 {
-    public class CommunityInfoClass
+    public class Community
     {
+        public int ID { get; set; }
         public string Name { get; set; }
         public string Price { get; set; }
         public string Area { get; set; }
         public string CareLevel { get; set; }
 
-        public CommunityInfoClass(string name, string price, string area, string careLevel)
+        public Community(string name, string price, string area, string careLevel)
         {
             Name = name;
             Price = price;
             Area = area;
             CareLevel = careLevel;
         }
+
+        public Community() { }
     } 
 }

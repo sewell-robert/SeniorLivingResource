@@ -13184,6 +13184,9 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
       "projectUniqueName": "C:\\Users\\Bobby\\Desktop\\FinalProjectMVC\\FinalProjectMVC\\FinalProjectMVC.csproj",
       "projectName": "FinalProjectMVC",

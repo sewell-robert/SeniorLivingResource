@@ -11,6 +11,7 @@ namespace FinalProjectMVC.Data
     {
         public DbSet<User> Users { get; set; }
         public DbSet<UserPrefs> Preferences { get; set; }
+        public DbSet<Community> Communities { get; set; }
 
         public FinalProjectDbContext(DbContextOptions<FinalProjectDbContext> options)
             : base(options)

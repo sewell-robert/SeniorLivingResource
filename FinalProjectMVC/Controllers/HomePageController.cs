@@ -21,14 +21,16 @@ namespace FinalProjectMVC.Controllers
             context = dbContext;
         }
 
-        static public CommunityInfoClass community = new CommunityInfoClass("The Piper", "High", "North", "High");
+        static public string tempUsername;
+
+        static public Community community = new Community("The Piper", "High", "North", "High");
 
         // GET: /<controller>/
         public IActionResult Index(int id)
         {
             ViewBag.community = community;
 
-            if (id > 0)
+            if (tempUsername != null)
             {
                 User user = context.Users.Single(c => c.ID == id);
 
@@ -46,12 +48,14 @@ namespace FinalProjectMVC.Controllers
             return View(registerViewModel);
         }
 
-        //Take user input as RegisterViewModel and create new User object
+        //Take user input as RegisterViewModel and create new User object with default UserPrefs object
         [HttpPost]
         public IActionResult Register(RegisterViewModel registerViewModel)
         {
             if (ModelState.IsValid)
             {
+                tempUsername = registerViewModel.Username;
+
                 UserPrefs newUserPrefs = new UserPrefs()
                 {
                     UsersPrice = registerViewModel.UsersPrice,
@@ -85,6 +89,8 @@ namespace FinalProjectMVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                tempUsername = loginViewModel.Username;
+
                 List<User> existingUsers = context.Users.ToList();
 
                 if (existingUsers != null)
@@ -103,13 +109,65 @@ namespace FinalProjectMVC.Controllers
 
         public IActionResult Browse()
         {
-            return View();
+            if (tempUsername != null)
+            {
+                User currentUser = context.Users.Single(c => c.Username == tempUsername);
+                UserPrefs currentUserPrefs = context.Preferences.Single(p => p.ID == currentUser.UserPrefsID);
+
+                string price = currentUserPrefs.UsersPrice;
+                string area = currentUserPrefs.UsersArea;
+                string careLevel = currentUserPrefs.UsersCareLevel;
+
+                List<Community> communityMatches = new List<Community>();
+
+                List<Community> communities = context.Communities.ToList();
+
+                foreach (Community com in communities)
+                {
+                    if (com.Price == price && com.Area == area && com.CareLevel == careLevel)
+                    {
+                        communityMatches.Add(com);
+                    }
+                }
+
+                return View(communityMatches);
+            }
+
+            List<Community> allCommunities = context.Communities.ToList();
+
+            return View(allCommunities);
+        }
+
+        public IActionResult AddCommunity()
+        {
+            AddCommunityViewModel addCommunityViewModel = new AddCommunityViewModel();
+
+            return View(addCommunityViewModel);
         }
 
         [HttpPost]
-        public IActionResult Browse(string name, string price, string area, string careLevel)
+        public IActionResult AddCommunity(AddCommunityViewModel addCommunityViewModel)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                /**Community newCommunity = new Community
+                {
+                    Name = addCommunityViewModel.Name,
+                    Price = addCommunityViewModel.Price,
+                    Area = addCommunityViewModel.Area,
+                    CareLevel = addCommunityViewModel.CareLevel
+                };**/
+
+                Community newCommunity = new Community(addCommunityViewModel.Name, addCommunityViewModel.Price, addCommunityViewModel.Area, addCommunityViewModel.CareLevel);
+
+                context.Communities.Add(newCommunity);
+                context.SaveChanges();
+
+                return View(addCommunityViewModel);
+            }
+
+            return Redirect("/Homepage/AddCommunity/");
         }
+
     }
 }
