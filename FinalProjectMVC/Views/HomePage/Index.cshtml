@@ -6,22 +6,36 @@
 
 @if (Model != null)
 {
-    <h3> Welcome, @Model.Username!</h3>
+    <h3> Hi, @Model.Username!</h3>
 }
 else
 {
-    <h3>Please login or register to save your preferences.</h3>
+    <h4 style="color: red">Please login or register to save your preferences.</h4>
 }
 
-<h2>Welcome to Senior Living Resource</h2>
+<h2>Welcome to the Senior Living Resource</h2>
+<br />
+
+<style>
+    .image {
+        display: inline-block;
+        text-align: center;
+    }
+    .image-style {
+        border-radius: 15px;
+    }
+</style>
 
 <div style="text-align: center">
-    <h2>Featured Community</h2>
+    <h2>Today's Featured Community</h2>
 
     <h3>@ViewBag.community.Name</h3><br />
-    <h4>Price: @ViewBag.community.Price</h4>
-    <h4>Area: @ViewBag.community.Area</h4>
-    <h4>Level of Care: @ViewBag.community.CareLevel</h4><br />
-    <img src="http://wolfmediausa.com/wp-content/uploads/2016/02/The-Piper-Kansas-City.jpg" alt="The Piper" height="300" width="600" />
+    <h4>Price: @ViewBag.community.Price &nbsp;&nbsp; Area: @ViewBag.community.Area &nbsp;&nbsp; Level of Care: @ViewBag.community.CareLevel</h4>
 </div>
+<br />
 
+<div class="image">
+    <img src="http://wolfmediausa.com/wp-content/uploads/2016/02/The-Piper-Kansas-City.jpg" alt="The Piper" height="300" width="560" class="image-style" />
+    &nbsp;
+    <img src="http://thepiperlife.com/wp-content/uploads/2016/06/headerimg-contact.jpg" alt="The Piper Dining Room" height="300" width="560" class="image-style" />
+</div>

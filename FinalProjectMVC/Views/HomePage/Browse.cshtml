@@ -2,18 +2,29 @@
 
 @if (Model != null)
 {
-<h3>@Model.Count Results</h3>
-
-<ul>
-    @foreach (Community com in Model)
+    @if (ViewBag.number == 1)
     {
-        <li>@com.Name</li>
+        <h3>@Model.Count result(s) match your preferences</h3>
+
+        <ul>
+            @foreach (Community com in Model)
+            {
+                <li>@com.Name</li>
+            }
+        </ul>
     }
-</ul>
-}
-else
-{
-    <h3>No results meet your preferences.</h3>
+
+    else
+    {
+        <h3>@Model.Count Results</h3>
+
+            <ul>
+                @foreach (Community com in Model)
+                {
+                    <li>@com.Name</li>
+                }
+            </ul>
+    }
 }
 
 <!--<form action="Browse" method="post">
@@ -43,6 +54,5 @@ else
 
     <input type="submit" value="submit" />
 </form>-->
-
 <!--Testing Browse form capabilities
 <h3>Search Parameters: @ViewBag.name  @ViewBag.price  @ViewBag.area  @ViewBag.careLevel</h3>-->

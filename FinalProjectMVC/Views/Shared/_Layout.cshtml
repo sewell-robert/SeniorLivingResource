@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="utf-8" />
@@ -15,9 +16,15 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+
+    <style>
+        .navbar-custom {
+            background-color: #002F6C;
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top navbar-custom">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -26,13 +33,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">FinalProjectMVC</a>
+                <a asp-area="" asp-controller="HomePage" asp-action="Index" class="navbar-brand">Home</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="HomePage" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Preferences" asp-action="ChangePrefs">Preferences</a></li>
                     <li><a asp-area="" asp-controller="HomePage" asp-action="Browse">Browse</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
                     <li><a asp-area="" asp-controller="HomePage" asp-action="Login">Login</a></li>
                     <li><a asp-area="" asp-controller="HomePage" asp-action="Register">Register</a></li>
                 </ul>

@@ -1,15 +1,32 @@
 ﻿@model FinalProjectMVC.ViewModels.LoginViewModel
 
+<style>
+    .error {
+        color: red;
+    }
+</style>
+
 <h2>Login Page</h2>
+<br />
+
+@if (ViewBag.num == 2)
+{
+    @if (Model.Username != null && Model.Password != null)
+    {
+        <p class="error">@ViewBag.error</p>
+        <br />
+    }
+}
 
 <form asp-controller="Homepage" asp-action="Login" method="post">
     <label asp-for="Username"></label>
     <input asp-for="Username" />
-    <span asp-validation-for="Username"></span>
+    <span class="error" asp-validation-for="Username"></span>
+    &nbsp; &nbsp;
 
     <label asp-for="Password"></label>
     <input type="password" asp-for="Password" />
-    <span asp-validation-for="Password"></span>
+    <span class="error" asp-validation-for="Password"></span>
 
     <input type="submit" value="Submit" />
 </form>

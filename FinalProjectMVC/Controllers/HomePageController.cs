@@ -23,16 +23,23 @@ namespace FinalProjectMVC.Controllers
 
         static public string tempUsername;
 
-        static public Community community = new Community("The Piper", "High", "North", "High");
+        static public Community community = new Community("The Piper", "High", "North Kansas City", "High");
 
         // GET: /<controller>/
         public IActionResult Index(int id)
         {
             ViewBag.community = community;
 
-            if (tempUsername != null)
+            if (id > 0)
             {
                 User user = context.Users.Single(c => c.ID == id);
+
+                return View(user);
+            }
+
+            if (tempUsername != null)
+            {
+                User user = context.Users.Single(c => c.Username == tempUsername);
 
                 return View(user);
             }
@@ -104,6 +111,9 @@ namespace FinalProjectMVC.Controllers
                     }
                 }
             }
+            string loginError = "Username or password is incorrect";
+            ViewBag.error = loginError;
+            ViewBag.num = 2;
             return View(loginViewModel);
         }
 
@@ -130,6 +140,7 @@ namespace FinalProjectMVC.Controllers
                     }
                 }
 
+                ViewBag.number = 1;
                 return View(communityMatches);
             }
 
