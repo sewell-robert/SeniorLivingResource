@@ -18,12 +18,13 @@
     {
         <h3>@Model.Count Results</h3>
 
-            <ul>
+            <table>
                 @foreach (Community com in Model)
                 {
-                    <li>@com.Name</li>
+                    <tr>@com.Name (@com.PhoneNumber)</tr>
+                    <tr>@com.Description</tr>
                 }
-            </ul>
+            </table>
     }
 }
 

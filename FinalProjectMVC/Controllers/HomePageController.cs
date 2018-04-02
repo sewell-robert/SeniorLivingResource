@@ -161,20 +161,40 @@ namespace FinalProjectMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                /**Community newCommunity = new Community
+                List<Community> existingCommunities = context.Communities.ToList();
+
+                foreach (Community community in existingCommunities)
                 {
-                    Name = addCommunityViewModel.Name,
-                    Price = addCommunityViewModel.Price,
-                    Area = addCommunityViewModel.Area,
-                    CareLevel = addCommunityViewModel.CareLevel
-                };**/
+                    if (community.Name == addCommunityViewModel.Name)
+                    {
+                        community.Description = addCommunityViewModel.Description;
+                        community.PhoneNumber = addCommunityViewModel.PhoneNumber;
 
-                Community newCommunity = new Community(addCommunityViewModel.Name, addCommunityViewModel.Price, addCommunityViewModel.Area, addCommunityViewModel.CareLevel);
+                        context.Communities.Update(community);
+                        context.SaveChanges();
 
-                context.Communities.Add(newCommunity);
-                context.SaveChanges();
+                        return View(addCommunityViewModel);
+                    }
+                    else
+                    {
+                        Community newCommunity = new Community
+                        {
+                            Name = addCommunityViewModel.Name,
+                            Description = addCommunityViewModel.Description,
+                            PhoneNumber = addCommunityViewModel.PhoneNumber,
+                            Price = addCommunityViewModel.Price,
+                            Area = addCommunityViewModel.Area,
+                            CareLevel = addCommunityViewModel.CareLevel
+                        };
 
-                return View(addCommunityViewModel);
+                        context.Communities.Add(newCommunity);
+                        context.SaveChanges();
+
+                        return View(addCommunityViewModel);
+
+                    }
+                }
+                
             }
 
             return Redirect("/Homepage/AddCommunity/");

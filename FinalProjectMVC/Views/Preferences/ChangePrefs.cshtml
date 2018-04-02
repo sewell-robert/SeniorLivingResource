@@ -4,7 +4,20 @@
     ViewData["Title"] = "Add Preferences";
 }
 
+<style>
+    .error {
+        color: red;
+    }
+</style>
+
 <h3>@ViewData["Title"]</h3>
+<br />
+
+@if (ViewBag.n == 3)
+{
+    <p class="error">@ViewBag.error</p>
+    <br />
+}
 
 <form asp-controller="Preferences" asp-action="ChangePrefs" method="post">
     <label asp-for="UsersPrice"></label>

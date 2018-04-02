@@ -50,6 +50,9 @@ namespace FinalProjectMVC.Controllers
                 }
 
                 //TODO - return an error letting the user know that he needs to login or register first
+                string prefsError = "Please login or register to change preferences.";
+                ViewBag.error = prefsError;
+                ViewBag.n = 3;
                 return View(preferencesViewModel);
 
             }
