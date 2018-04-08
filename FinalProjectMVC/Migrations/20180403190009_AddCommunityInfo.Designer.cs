@@ -11,9 +11,10 @@ using System;
 namespace FinalProjectMVC.Migrations
 {
     [DbContext(typeof(FinalProjectDbContext))]
-    partial class FinalProjectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180403190009_AddCommunityInfo")]
+    partial class AddCommunityInfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,8 +31,6 @@ namespace FinalProjectMVC.Migrations
                     b.Property<string>("CareLevel");
 
                     b.Property<string>("Description");
-
-                    b.Property<string>("GoogleAddress");
 
                     b.Property<string>("Name");
 

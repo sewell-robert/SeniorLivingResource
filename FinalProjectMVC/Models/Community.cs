@@ -11,6 +11,7 @@ namespace FinalProjectMVC.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string PhoneNumber { get; set; }
+        public string GoogleAddress { get; set; }
 
         public string Price { get; set; }
         public string Area { get; set; }

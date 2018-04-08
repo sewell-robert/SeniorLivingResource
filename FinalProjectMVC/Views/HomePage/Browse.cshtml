@@ -1,59 +1,119 @@
 ﻿@model List<FinalProjectMVC.Models.Community>
 
+<style>
+    .name {
+        width: 50%;
+        vertical-align: top;
+    }
+
+    .phone_number {
+        margin-top: 10px;
+    }
+
+    .table {
+        border-top: 1px;
+        border-color: darkslategrey;
+    }
+</style>
+
 @if (Model != null)
 {
     @if (ViewBag.number == 1)
     {
         <h3>@Model.Count result(s) match your preferences</h3>
+        <br />
+        <br />
 
-        <ul>
-            @foreach (Community com in Model)
-            {
-                <li>@com.Name</li>
-            }
-        </ul>
+        @foreach (Community com in Model)
+        {
+            <table class="table">
+                <tr>
+                    <td class="name"><h4>@com.Name</h4><br /><br />@com.Description</td>
+                    <td class="phone_number">@com.PhoneNumber</td>
+                    <td>
+                        <iframe width="400"
+                                height="250"
+                                frameborder="0" style="border:0"
+                                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDOELKd8THjAlmPVHaNZt3wG7fgOC6CdPo
+                                    &q=@com.GoogleAddress" allowfullscreen></iframe>
+                    </td>
+                </tr>
+            </table>
+        }
     }
 
     else
     {
-        <h3>@Model.Count Results</h3>
+        <h3>@Model.Count Result(s)</h3>
+        <br />
+        <br />
 
-            <table>
-                @foreach (Community com in Model)
-                {
-                    <tr>@com.Name (@com.PhoneNumber)</tr>
-                    <tr>@com.Description</tr>
-                }
+
+        @foreach (Community com in Model)
+        {
+            <table class="table">
+                <tr>
+                    <td class="name"><h4>@com.Name</h4><br /><br />@com.Description</td>
+                    <td class="phone_number">@com.PhoneNumber</td>
+                    <td>
+                        <iframe
+                                width="400"
+                                height="250"
+                                frameborder="0" style="border:0"
+                                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDOELKd8THjAlmPVHaNZt3wG7fgOC6CdPo
+                                &q=@com.GoogleAddress" allowfullscreen></iframe>
+                    </td>
+                </tr>
             </table>
+            <br />
+            <br />
+        }
     }
 }
 
-<!--<form action="Browse" method="post">
-    <label for="name">Search by Name</label>
-    <input type="text" id="name" name="Name" />
 
-    <label for="price">Price Range</label>
-    <select id="price" name="price">
-        <option value="Low">Low</option>
-        <option value="Medium">Medium</option>
-        <option value="High">High</option>
-    </select>
+    <!--Maps API Practice
 
-    <label for="area">Area Location</label>
-    <select id="area" name="area">
-        <option value="South">South Kansas City</option>
-        <option value="Central">Central Kansas City</option>
-        <option value="North">North Kansas City</option>
-    </select>
+        <iframe width="600"
+            height="450"
+            frameborder="0" style="border:0"
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDOELKd8THjAlmPVHaNZt3wG7fgOC6CdPo
+    &q=Vintage+Park+of+Lenexa" allowfullscreen></iframe>-->
 
-    <label for="careLevel">Level of Care</label>
-    <select id="careLevel" name="careLevel">
-        <option value="Low">Low Level of Care</option>
-        <option value="Medium">Medium Level of Care</option>
-        <option value="High">High Level of Care</option>
-    </select>
+    <!--<div id="myMap" style="position:relative; width:400px; height:400px;"></div>
 
-    <input type="submit" value="submit" />
-</form>-->
-<!--Testing Browse form capabilities
-<h3>Search Parameters: @ViewBag.name  @ViewBag.price  @ViewBag.area  @ViewBag.careLevel</h3>-->
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        var map = null;
+
+        function LoadMap() {
+            map = new Microsoft.Maps.Map('#myMap', {
+                credentials: "AosO291UIdj7ZUgbSBlZHfNm8QuvdmTGTFnY41MorBfXp0DSxUUfOJ6mpCNJ_MHp"
+            });
+        }
+
+        /*$('#btnShowLocations').click(function () {
+            var url = "/Home/GetLocations";
+            $.getJSON(url, null, function (data) {
+                var pins = [];
+
+                $.each(data, function (index, LocationData) {
+                    var pushpin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(
+                        LocationData.latitude,
+                        LocationData.longitude));
+
+                    pins.push(pushpin);
+                });
+
+                map.entities.push(pins);
+
+                map.setView({
+                    zoom: 4, center: new Microsoft.Maps.Location(38.9704369, -94.74055)
+                });
+            });
+        });*/
+
+    </script>
+    <script type="text/javascript" src="https://www.bing.com/api/maps/mapcontrol?callback=LoadMap" async defer></script>-->
+
+

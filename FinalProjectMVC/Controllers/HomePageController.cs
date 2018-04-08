@@ -199,6 +199,5 @@ namespace FinalProjectMVC.Controllers
 
             return Redirect("/Homepage/AddCommunity/");
         }
-
     }
 }

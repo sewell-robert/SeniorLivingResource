@@ -11,9 +11,10 @@ using System;
 namespace FinalProjectMVC.Migrations
 {
     [DbContext(typeof(FinalProjectDbContext))]
-    partial class FinalProjectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180408193144_AddCommunitiesGoogleMapsApiAddress")]
+    partial class AddCommunitiesGoogleMapsApiAddress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
