@@ -8,7 +8,7 @@ Homepage: Users are directed to this page once registration or login credentials
 
 Preferences Page: Allows the user to change their community preferences at any time. Changing these will affect the results on the Browse page.
 
-Browse Page: Lists blocks of information for each community that reflects the user's chosen preferences. Users can find out information about a community from the description and contact the community by calling the phone number that is provided or by visiting the community with the help of the Google Maps Embed API. Pictures will be added into each block for a better user experience.
+Browse Page: Lists blocks of information for each community that reflects the user's chosen preferences. Users can find out information about a community from the description and contact the community by calling the phone number that is provided or by visiting the community with the help of the Google Maps Embed API. Pictures and floor plans will be added into each block for a better user experience.
 
 Register Page: Users are required to enter a valid username, password, and verify pasword. Email is optional. Users may also set their initial preferences on this page, or default preferences will be saved.
 
