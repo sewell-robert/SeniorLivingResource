@@ -16,4 +16,4 @@ Login: Users will be asked to login with each visit to the Senior Living Resourc
 
 Database: The Microsoft Entity Framework is employed and information about the user, the user's preferences, and the communities is stored here. The users db set and the user's preferences db set are a 1-to-1 relationship.
 
-Languages, Frameworks and Other Technologies Used: C#, ASP .NET, Razor Templates, Google Maps API, HTML, CSS
+Languages, Frameworks and Other Technologies Used: C#, ASP.NET MVC, Razor Templates, Google Maps Embed API, HTML, CSS
