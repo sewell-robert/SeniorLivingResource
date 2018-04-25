@@ -7,6 +7,7 @@ using FinalProjectMVC.Models;
 using FinalProjectMVC.ViewModels;
 using FinalProjectMVC.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -61,8 +62,9 @@ namespace FinalProjectMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                tempUsername = registerViewModel.Username;
+                
 
+                //Create an object for the newly registered user's preferences and save changes to the database
                 UserPrefs newUserPrefs = new UserPrefs()
                 {
                     UsersPrice = registerViewModel.UsersPrice,
@@ -73,13 +75,23 @@ namespace FinalProjectMVC.Controllers
                 context.Preferences.Add(newUserPrefs);
                 context.SaveChanges();
 
-                User newUser = new User(registerViewModel.Username, registerViewModel.Password, registerViewModel.Email, newUserPrefs);
+                //Convert user's password into a PBKDF2 key for strengthened security
+                //Create a new User object and add it to the database
+                using (var deriveBytes = new Rfc2898DeriveBytes(registerViewModel.Password, 20))
+                {
+                    byte[] salt = deriveBytes.Salt;
+                    byte[] key = deriveBytes.GetBytes(20);
 
-                //Add new User object to database
-                context.Users.Add(newUser);
-                context.SaveChanges();
+                    User newUser = new User(registerViewModel.Username, key, salt, registerViewModel.Email, newUserPrefs);
 
-                return Redirect("/Homepage/Index/?id=" + newUser.ID);
+                    context.Users.Add(newUser);
+                    context.SaveChanges();
+
+                    //Keep track of the user in this session
+                    tempUsername = registerViewModel.Username;
+
+                    return Redirect("/Homepage/Index/?id=" + newUser.ID);
+                }   
             }
 
             else return View(registerViewModel);
@@ -94,23 +106,38 @@ namespace FinalProjectMVC.Controllers
         [HttpPost]
         public IActionResult Login(LoginViewModel loginViewModel)
         {
+            //Check if user posted valid inputs
+            //Get the user's salt from the db
+            //Derive a new key and compare with the key/salt stored in the db
+            //Keep track of user in session and then redirect to the homepage
             if (ModelState.IsValid)
             {
-                tempUsername = loginViewModel.Username;
+                List<User> existingUser = context.Users.ToList();
 
-                List<User> existingUsers = context.Users.ToList();
-
-                if (existingUsers != null)
+                if (existingUser != null) //TODO - If false, create error message asking user to register first
                 {
-                    foreach (User user in existingUsers)
+                    foreach (User user in existingUser)
                     {
-                        if (user.Username == loginViewModel.Username && user.Password == loginViewModel.Password)
+                        if ( user.Username == loginViewModel.Username)
                         {
-                            return Redirect("/HomePage/Index/?id=" + user.ID);
-                        }
+                            byte[] salt = user.Salt;
+
+                            using (var deriveBytes = new Rfc2898DeriveBytes(loginViewModel.Password, salt))
+                            {
+                                byte[] matchKey = deriveBytes.GetBytes(20);
+
+                                if (matchKey.SequenceEqual(user.HashedPassword))
+                                {
+                                    tempUsername = loginViewModel.Username;
+
+                                    return Redirect("/HomePage/Index/?id=" + user.ID);
+                                }
+                            }
+                        }        
                     }
                 }
             }
+            //Send user back to the login page with the following error message
             string loginError = "Username or password is incorrect";
             ViewBag.error = loginError;
             ViewBag.num = 2;

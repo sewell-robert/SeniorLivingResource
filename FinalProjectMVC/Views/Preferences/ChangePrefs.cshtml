@@ -1,18 +1,27 @@
 ﻿@model FinalProjectMVC.ViewModels.PreferencesViewModel
 
-@{
-    ViewData["Title"] = "Add Preferences";
-}
-
 <style>
     .error {
         color: red;
     }
+
+    fieldset {
+        border: 1px groove #ddd !important;
+        padding: 0 1.4em 1.4em 1.4em !important;
+        margin: 0 0 1.5em 0 !important;
+        -webkit-box-shadow: 0px 0px 0px 0px #000;
+        box-shadow: 0px 0px 0px 0px #000;
+    }
+
+    legend {
+        width: inherit;
+        padding: 0 10px;
+        border-bottom: none;
+    }
+
 </style>
 
-<h3>@ViewData["Title"]</h3>
-<br />
-
+<br /><br />
 @if (ViewBag.n == 3)
 {
     <p class="error">@ViewBag.error</p>
@@ -20,15 +29,18 @@
 }
 
 <form asp-controller="Preferences" asp-action="ChangePrefs" method="post">
-    <label asp-for="UsersPrice"></label>
-    <select asp-for="UsersPrice" asp-items="Model.Prices"></select>
-    &nbsp;
-    <label asp-for="UsersArea"></label>
-    <select asp-for="UsersArea" asp-items="Model.Areas"></select>
-    &nbsp;
-    <label asp-for="UsersCareLevel"></label>
-    <select asp-for="UsersCareLevel" asp-items="Model.CareLevels"></select>
+    <fieldset>
+        <legend>Change Preferences</legend>
+        <label asp-for="UsersPrice"></label>
+        <select asp-for="UsersPrice" asp-items="Model.Prices"></select>
+        &nbsp;
+        <label asp-for="UsersArea"></label>
+        <select asp-for="UsersArea" asp-items="Model.Areas"></select>
+        &nbsp;
+        <label asp-for="UsersCareLevel"></label>
+        <select asp-for="UsersCareLevel" asp-items="Model.CareLevels"></select>
 
-    <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" />
+    </fieldset>
 </form>
 

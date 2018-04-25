@@ -8,55 +8,71 @@
     tr.spaceUnder>td {
         padding-bottom: 5px;
     }
+
+    fieldset {
+        border: 1px groove #ddd !important;
+        padding: 0 1.4em 1.4em 1.4em !important;
+        margin: 0 0 1.5em 0 !important;
+        -webkit-box-shadow: 0px 0px 0px 0px #000;
+        box-shadow: 0px 0px 0px 0px #000;
+    }
+
+    legend {
+        width: inherit;
+        padding: 0 10px;
+        border-bottom: none;
+    }
+
 </style>
 
-<h2>Registration Page</h2>
-<br />
-
+<br /><br />
 <form asp-controller="Homepage" asp-action="Register" method="post">
-    <table>
-        <tr class="spaceUnder">
-            <td><label asp-for="Username"></label></td>
-            <td><input asp-for="Username" /></td>
-            <td><span class="error" asp-validation-for="Username"></span></td>
-        </tr>
-        <tr class="spaceUnder">
-            <td><label asp-for="Email"></label></td>
-            <td><input asp-for="Email" /></td>
-            <td><span class="error" asp-validation-for="Email"></span></td>
-        </tr>
-        <tr class="spaceUnder">
-            <td><label asp-for="Password"></label></td>
-            <td><input type="password" asp-for="Password" /></td>
-            <td><span class="error" asp-validation-for="Password"></span></td>
-        </tr>
-        <tr class="spaceUnder">
-            <td><label asp-for="Verify"></label></td>
-            <td><input type="password" asp-for="Verify" /></td>
-            <td><span class="error" asp-validation-for="Verify"></span></td>
-        </tr>
-    </table>
-    <br />
+    <fieldset>
+        <legend>Register</legend><br />
+        <table>
+            <tr class="spaceUnder">
+                <td><label asp-for="Username"></label></td>
+                <td><input asp-for="Username" /></td>
+                <td><span class="error" asp-validation-for="Username"></span></td>
+            </tr>
+            <tr class="spaceUnder">
+                <td><label asp-for="Email"></label></td>
+                <td><input asp-for="Email" /></td>
+                <td><span class="error" asp-validation-for="Email"></span></td>
+            </tr>
+            <tr class="spaceUnder">
+                <td><label asp-for="Password"></label></td>
+                <td><input type="password" asp-for="Password" /></td>
+                <td><span class="error" asp-validation-for="Password"></span></td>
+            </tr>
+            <tr class="spaceUnder">
+                <td><label asp-for="Verify"></label></td>
+                <td><input type="password" asp-for="Verify" /></td>
+                <td><span class="error" asp-validation-for="Verify"></span></td>
+            </tr>
+        </table>
+        <br /><br />
 
-    <h5>Choose Preferences:</h5>
-    <br />
+        <h5>Choose Preferences:</h5>
+        <br />
 
-    <label asp-for="UsersPrice"></label>
-    <select asp-for="UsersPrice" asp-items="Model.Prices"></select>
-    <span class="error" asp-validation-for="UsersPrice"></span>
-    &nbsp;&nbsp;
+        <label asp-for="UsersPrice"></label>
+        <select asp-for="UsersPrice" asp-items="Model.Prices"></select>
+        <span class="error" asp-validation-for="UsersPrice"></span>
+        &nbsp;&nbsp;
 
-    <label asp-for="UsersArea"></label>
-    <select asp-for="UsersArea" asp-items="Model.Areas"></select>
-    <span class="error" asp-validation-for="UsersArea"></span>
-    &nbsp;&nbsp;
+        <label asp-for="UsersArea"></label>
+        <select asp-for="UsersArea" asp-items="Model.Areas"></select>
+        <span class="error" asp-validation-for="UsersArea"></span>
+        &nbsp;&nbsp;
 
-    <label asp-for="UsersCareLevel"></label>
-    <select asp-for="UsersCareLevel" asp-items="Model.CareLevels"></select>
-    <span class="error" asp-validation-for="UsersCareLevel"></span>
-    <br /><br />
+        <label asp-for="UsersCareLevel"></label>
+        <select asp-for="UsersCareLevel" asp-items="Model.CareLevels"></select>
+        <span class="error" asp-validation-for="UsersCareLevel"></span>
+        <br /><br /><br />
 
-    <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" />
+    </fieldset>
 </form>
 
 

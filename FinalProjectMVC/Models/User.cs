@@ -10,16 +10,18 @@ namespace FinalProjectMVC.Models
         //create class to create new users
         public int ID { get; set; }
         public string Username { get; set; }
-        public string Password { get; set; }
+        public byte[] HashedPassword { get; set; }
+        public byte[] Salt { get; set; }
         public string Email { get; set; }
 
         public UserPrefs Prefs { get; set; }
         public int UserPrefsID { get; set; }
 
-        public User(string username, string password, string email, UserPrefs newUserPrefs)
+        public User(string username, byte[] hashedPassword, byte[] salt, string email, UserPrefs newUserPrefs)
         {
             Username = username;
-            Password = password;
+            HashedPassword = hashedPassword;
+            Salt = salt;
             Email = email;
             Prefs = newUserPrefs;
         }

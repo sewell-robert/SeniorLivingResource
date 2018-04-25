@@ -4,10 +4,22 @@
     .error {
         color: red;
     }
-</style>
 
-<h2>Login Page</h2>
-<br />
+    fieldset {
+        border: 1px groove #ddd !important;
+        padding: 0 1.4em 1.4em 1.4em !important;
+        margin: 0 0 1.5em 0 !important;
+        -webkit-box-shadow: 0px 0px 0px 0px #000;
+        box-shadow: 0px 0px 0px 0px #000;
+    }
+
+    legend {
+        width: inherit;
+        padding: 0 10px;
+        border-bottom: none;
+    }
+
+</style>
 
 @if (ViewBag.num == 2)
 {
@@ -18,15 +30,19 @@
     }
 }
 
+<br /><br />
 <form asp-controller="Homepage" asp-action="Login" method="post">
-    <label asp-for="Username"></label>
-    <input asp-for="Username" />
-    <span class="error" asp-validation-for="Username"></span>
-    &nbsp; &nbsp;
+    <fieldset>
+        <legend>Login</legend>
+        <label asp-for="Username"></label>
+        <input asp-for="Username" />
+        <span class="error" asp-validation-for="Username"></span>
+        &nbsp; &nbsp;
 
-    <label asp-for="Password"></label>
-    <input type="password" asp-for="Password" />
-    <span class="error" asp-validation-for="Password"></span>
+        <label asp-for="Password"></label>
+        <input type="password" asp-for="Password" />
+        <span class="error" asp-validation-for="Password"></span>
 
-    <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" />
+    </fieldset>
 </form>
