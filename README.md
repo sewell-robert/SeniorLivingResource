@@ -1,4 +1,4 @@
-# FinalProjectMVC - Senior Living Resource
+# Senior Living Resource
 
 This project will be a resource for helping seniors and their loved ones find the right senior living community.
 Once users log in or register, they will be welcomed to the homepage. From there, they will be able to navigate to other pages that 
