@@ -14,6 +14,8 @@ Register Page: Users are required to enter a valid username, password, and verif
 
 Login: Users will be asked to login with each visit to the Senior Living Resource. By logging in with the correct username and password combination, users will be able to browse by their preferences and make changes to their preferences. If the user is not logged in, the browse page will generate every community in the database.
 
+Contact Page: With the assistance of the MailKit library, users can now send email requests to site administrators.
+
 Database: The Microsoft Entity Framework is employed and information about the user, the user's preferences, and the communities is stored here. The users db set and the user's preferences db set are a 1-to-1 relationship.
 
 # Languages, Frameworks and Other Technologies Used:
