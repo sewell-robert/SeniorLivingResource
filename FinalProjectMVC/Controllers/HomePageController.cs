@@ -8,6 +8,8 @@ using FinalProjectMVC.ViewModels;
 using FinalProjectMVC.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
+using MimeKit;
+using MailKit.Net.Smtp;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -174,6 +176,39 @@ namespace FinalProjectMVC.Controllers
             List<Community> allCommunities = context.Communities.ToList();
 
             return View(allCommunities);
+        }
+
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
+        public IActionResult SendEmail(ContactViewModel contactViewModel)
+        {
+            var customerName = contactViewModel.CustomerName;
+            var customerEmail = contactViewModel.CustomerEmail;
+            var customerRequest = contactViewModel.CustomerRequest;
+
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress(customerEmail));
+            message.To.Add(new MailboxAddress("sasquatch726@gmail.com"));
+            message.Subject = customerName;
+            message.Body = new TextPart("plain")
+            {
+                Text = customerRequest
+            };
+
+            using (var client = new SmtpClient())
+            {
+                client.Connect("smtp.gmail.com", 587, false);
+                client.Authenticate("sasquatch726@gmail.com", "HarleyDog627");
+
+                client.Send(message);
+
+                client.Disconnect(true);
+            }
+
+            return Redirect("/Homepage/Index/");
         }
 
         public IActionResult AddCommunity()

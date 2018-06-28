@@ -1,0 +1,29 @@
+﻿@model FinalProjectMVC.ViewModels.ContactViewModel
+
+<form asp-controller="HomePage" asp-action="SendEmail" method="post">
+    <fieldset>
+        <legend>Contact</legend>
+        <div>
+            <label asp-for="CustomerName">Name</label>
+            <input asp-for="CustomerName" />
+            <span asp-validation-for="CustomerName"></span>
+        </div>
+
+        <div>
+            <label asp-for="CustomerEmail">Email</label>
+            <input asp-for="CustomerEmail" />
+            <span asp-validation-for="CustomerEmail"></span>
+        </div>
+
+        <div>
+            <label asp-for="CustomerRequest">Request</label>
+            <textarea asp-for="CustomerRequest"></textarea>
+            <span asp-validation-for="CustomerRequest"></span>
+        </div>
+
+        <div>
+            <input type="submit" value="Submit" />
+        </div>
+    </fieldset>
+</form>
+
